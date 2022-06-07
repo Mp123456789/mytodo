@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const _ = require("lodash");
 
 const app = express();
-let workItems = [];
+// let workItems = [];
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
@@ -47,9 +47,9 @@ app.get('/', function(req, res){
     if(foundItems.length === 0){
       Item.insertMany(defaultItems, function(err){
         if(err){
-          // console.log(err);
+          console.log(err);
         } else {
-          // console.log("Successfully saved default items to db");
+          console.log("Successfully saved default items to db");
         }
       });
       res.redirect('/');
@@ -129,7 +129,7 @@ app.post('/delete', function(req,res){
   if(listName === "Today"){
     Item.findByIdAndRemove(checkedItemId, function(err){
       if(!err){
-        // console.log("Successfully deleted checked item");
+        console.log("Successfully deleted checked item");
 
         //without redirect no element will be deleted from web page
         res.redirect('/');
@@ -161,12 +161,7 @@ app.post('/delete', function(req,res){
 // });
 
 
-//in list01 page
-app.get('/about',function(req, res){
-  res.render("about");
-});
 
-let port = process.env.PORT || 3000;
-app.listen(port , function(){
+app.listen( Process.env.PORT || 3000 , function(){
   console.log('Server is listening on port 3000.');
 });
